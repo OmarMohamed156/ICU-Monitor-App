@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/Login';
 import MainScreen from './screens/MainScreen';
-import Room1 from './screens/Room1';
+import Room from './screens/Room';
 import Sensors from './screens/Sensors';
 import Config from './screens/Configuration';
 import axios from 'axios';
@@ -35,8 +35,11 @@ export default function App() {
           }}
           />
           <stack.Screen
-          name="Room1"
-          component={Room1}
+          name="Room"
+          component={Room}
+          options={{
+            headerShown: false,
+          }}
           />
           <stack.Screen
           name="Sensors"

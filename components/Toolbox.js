@@ -24,10 +24,6 @@ const Toolbox = ({ navigation }) => {
     return(
         <ScrollView   horizontal>
             <View style={styles.slider}>
-                {/* <View style={styles.capsules}><Button  title='Sensor 1' /></View>
-                <View style={styles.capsules}><Button  title='Sensor 1' /></View>
-                <View style={styles.capsules}><Button  title='Sensor 1' /></View>
-                <View style={styles.capsules}><Button  title='Stop and Exit' /></View> */}
                 {buttons.map((button) => {
                     return (
                         <View key={button.title} style={styles.capsules}>

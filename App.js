@@ -5,9 +5,14 @@ import Login from './screens/Login';
 import MainScreen from './screens/MainScreen';
 import Room1 from './screens/Room1';
 import Sensors from './screens/Sensors';
+import Config from './screens/Configuration';
+import axios from 'axios';
 
 export default function App() {
   const stack = createNativeStackNavigator(); 
+
+  axios.defaults.baseURL = 'http://192.168.43.226:80/';
+
   return (
     <NavigationContainer>
       <stack.Navigator>
@@ -17,6 +22,10 @@ export default function App() {
           options={{
             headerShown: false,
           }}
+          />
+          <stack.Screen
+          name="Config"
+          component={Config}
           />
           <stack.Screen
           name="MainScreen"

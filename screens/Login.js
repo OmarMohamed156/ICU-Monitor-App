@@ -52,11 +52,19 @@ const Login = ({ navigation }) => {
                     loginHandler();
                 }} />
             </TouchableOpacity>
+<TouchableOpacity style={styles.config}  onPress={()=>{navigation.navigate('Config')}} ><Text style={styles.configText}>Add Configuration</Text></TouchableOpacity>
         </SafeAreaView>
     );
 };
 
     const styles = StyleSheet.create({
+        config: {
+            marginVertical: 30,
+        },
+        configText: {
+            color: Colors.secondary,
+            fontWeight: 'bold',
+        },
         title: {
             marginTop: 130,
             fontSize: 20,

@@ -14,7 +14,7 @@ const Room = ({ navigation,route }) => {
                 return(
                     <TouchableOpacity key={index} onPress={()=>{navigation.navigate('Sensors',{
                         patientSensors: item.sensors,
-                    })}} style={styles.linkContainer}><Text style={styles.link}>Patient {item.patient} </Text></TouchableOpacity>
+                    })}} style={styles.linkContainer}><Text style={styles.link}> {item.patient_name}  (id: {item.patient_id}) </Text></TouchableOpacity>
                 )    
             })}
         </SafeAreaView>

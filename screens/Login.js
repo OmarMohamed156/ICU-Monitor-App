@@ -40,11 +40,9 @@ const Login = ({ navigation }) => {
             <View style={styles.inputContainer}>
                 <TextInput  placeholder='Email' onChangeText={(mail)=>{
                     setEmail(mail);
-                    console.log(email);
                 }} style={{...styles.input,borderColor: Colors.primary}} />
                 <TextInput secureTextEntry={true} onChangeText={(pass)=>{
                     setPassword(pass);
-                    console.log(password);
                 }}  placeholder='Password' style={{...styles.input,borderColor: Colors.secondary}} />
             </View>
             <TouchableOpacity style={styles.buttonContainer}>

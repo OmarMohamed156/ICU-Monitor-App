@@ -47,7 +47,7 @@ const MainScreen = ({ navigation }) => {
                         })
                     }}>
                     <Card style={styles.card}>
-                            <Text style={styles.cardText}>Room: {item.room}</Text>
+                            <Text style={styles.cardText}>Room: {item.room_id}</Text>
                             <Text style={styles.cardText}>No of Patients: {item.patients.length}</Text>
                     </Card>
                     </TouchableOpacity>

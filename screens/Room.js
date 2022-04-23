@@ -4,6 +4,8 @@ import Colors from '../constants/Colors';
 
 
 
+
+
 const Room = ({ navigation,route }) => {
     const {roomPatients,roomID} = route.params;
     console.log(roomPatients)

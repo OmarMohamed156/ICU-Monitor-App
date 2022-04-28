@@ -8,7 +8,6 @@ import Colors from '../constants/Colors';
 
 const Room = ({ navigation,route }) => {
     const {roomPatients,roomID} = route.params;
-    console.log(roomPatients)
     return(
         <SafeAreaView style={styles.container}>
             <Text style={styles.title} >Room {roomID} Patients</Text>

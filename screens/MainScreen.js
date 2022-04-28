@@ -8,14 +8,7 @@ import Card from '../components/Card';
 const MainScreen = ({ navigation }) => {
 
     const [data, setData] = useState();
-    
-    // const[socketMessage,setSocketMessage]=useState('')
-    // var ws = new WebSocket('ws://192.168.43.226:80/slave');
-    // ws.onmessage = msg =>{
-    //     setSocketMessage(msg.data)
-    //     console.log(msg.data)
-    // }
-    // ws.OPEN ? console.log('the socket is connected'): console.log('the socket is not connected, please reconnect')
+
 
     const getData = () => {
         axios.get('all-data')

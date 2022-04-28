@@ -11,7 +11,7 @@ import axios from 'axios';
 export default function App() {
   const stack = createNativeStackNavigator(); 
 
-  axios.defaults.baseURL = 'http://172.28.132.244:80/';
+  axios.defaults.baseURL = 'http://192.168.43.226:80/';
 
   return (
     <NavigationContainer>

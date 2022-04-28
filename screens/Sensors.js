@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View, TextInput,Button , ToastAndroid,Alert,ScrollView,Dimensions } from 'react-native';
 import React ,{useState,useEffect} from 'react';
-import { VictoryLine,VictoryAxis, VictoryChart,VictoryLabel, VictoryTheme } from "victory-native";
+import { VictoryLine,VictoryAxis,VictoryZoomContainer, VictoryChart,VictoryLabel, VictoryTheme } from "victory-native";
 import Colors  from '../constants/Colors'
 import axios from 'axios';
 
@@ -16,9 +16,9 @@ const Sensors = ({ navigation,route }) => {
 
     const [minX,setMinX]= useState(0);
     const [maxX,setMaxX]= useState(5);
-
     const {patientSensors} = route.params;
     const [socket,setSocket] = useState();
+    const [showAllData,setShowAllData] = useState(false);
     const [socketMessage,setSocketMessage]=useState()
     const [sensorData,setSensorData]=useState([])
     const [showGraph,setShowGraph]=useState(false)
@@ -26,12 +26,15 @@ const Sensors = ({ navigation,route }) => {
 
 
     useEffect(()=>{
-        var ws = new WebSocket('ws://172.28.132.244:80/slave');
+        var ws = new WebSocket('ws://192.168.43.226:80/slave');
         setSocket(ws);
         ws.onmessage= msg =>{
             var message = JSON.parse(msg.data);
-                setMinX(message.length-5);
-                setMaxX(5+message.length);
+            if(sensorData.length > 0){
+                setMinX((oldMin)=>oldMin+1)
+                setMaxX((oldMax)=>oldMax+1)
+            }
+            console.log (message);
             setSensorData(message)
         }
         ws.onopen = (e) => {
@@ -75,8 +78,8 @@ const Sensors = ({ navigation,route }) => {
             </ScrollView>
             <View  style={{height:520,borderRadius:50}} >
                 {showGraph?             <View>
-                <VictoryChart width={350} theme={VictoryTheme.material}>
-                <VictoryLine data={sensorData}  y="value" />
+                <VictoryChart containerComponent={<VictoryZoomContainer/>}  width={350} theme={VictoryTheme.material}>
+                    <VictoryLine data={sensorData}  y="value" />
                 <VictoryAxis domain={{x:[minX,maxX]}} style={{axisLabel:{
                         fontSize: 15, fill:'#059669'
                       }}} crossAxis label='time' axisLabelComponent={<VictoryLabel dy={25}  textAnchor='inherit' />}/>
@@ -85,9 +88,14 @@ const Sensors = ({ navigation,route }) => {
                       }}} dependentAxis crossAxis  label='value'   axisLabelComponent={<VictoryLabel  dy={-30} textAnchor='inherit' />}/>
                 </VictoryChart>
             </View> :null}
-                <Button  title='Turn On/Off' onPress={()=>{
+                <Button  title='Turn On' onPress={()=>{
                     socket.send(JSON.stringify({type:'control',state:true}))
                 }}/>
+                <View style={{marginVertical:5}}>
+                <Button  title='Turn Off' color={Colors.secondary} onPress={()=>{
+                    socket.send(JSON.stringify({type:'control',state:false}))
+                }}/>
+                </View>
             </View>
         </SafeAreaView>
     )

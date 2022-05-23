@@ -12,6 +12,8 @@ const Config = ({ navigation}) => {
     const [showRoomForm, setShowRoomForm] = useState(false);
     const [showSensorForm, setShowSensorForm] = useState(false);
 
+    const[sensorUnit,setSensorUnit]=useState('')
+
     const [name, setName] = useState('');
     const [code,setCode] = useState('');
     const[patchserialnumber,setPatchserialnumber] = useState();
@@ -71,6 +73,7 @@ const Config = ({ navigation}) => {
         }
         else{
             axios.post('sensors', {
+                sensor_unit: sensorUnit,
                 type: sensortype,
                 serial_number: serial,
                 room_id: sensorroomid,
@@ -132,6 +135,7 @@ const Config = ({ navigation}) => {
                 <View style={styles.inputContainer} > 
                     <TextInput placeholder='Serial Number' onChangeText={(serial)=>{setSerial(serial)}} secureTextEntry={false}  style={styles.input} />
                     <TextInput placeholder='Sensor Type'   onChangeText={(type)=>{setSensorType(type)}}  secureTextEntry={false}  style={styles.input} />
+                    <TextInput placeholder='Sensor Unit'   onChangeText={(unit)=>{setSensorUnit(unit)}}  secureTextEntry={false}  style={styles.input} />
                     <TextInput placeholder='Sensor Room ID'   onChangeText={(srID)=>{setSensorRoomId(srID)}} keyboardType='decimal-pad'  secureTextEntry={false}  style={styles.input} />
                     <TextInput placeholder='Sensor Patient ID'   onChangeText={(spID)=>{setSensorPatientId(spID)}} keyboardType='decimal-pad'  secureTextEntry={false}  style={styles.input} />
                     <View style={styles.btnContainer} >

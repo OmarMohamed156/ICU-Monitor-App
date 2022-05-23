@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput,Button , TouchableOpacity,Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from '../constants/Colors';
+import {useEffect} from 'react'
 
 
 
@@ -15,6 +16,7 @@ const Room = ({ navigation,route }) => {
                 return(
                     <TouchableOpacity key={index} onPress={()=>{navigation.navigate('Sensors',{
                         patientSensors: item.sensors,
+                        patientID: item.patient_id
                     })}} style={styles.linkContainer}><Text style={styles.link}> {item.patient_name}  (id: {item.patient_id}) </Text></TouchableOpacity>
                 )    
             })}

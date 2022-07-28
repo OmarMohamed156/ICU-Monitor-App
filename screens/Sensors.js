@@ -27,7 +27,7 @@ const Sensors = ({ navigation,route }) => {
     }
 
     useEffect(()=>{
-        var ws = new WebSocket('ws://172.28.132.166:80/slave');
+        var ws = new WebSocket('ws://192.168.43.226:80/slave');
         setSocket(ws);
         ws.onmessage= msg =>{
             var message = JSON.parse(msg.data);
@@ -95,7 +95,7 @@ const Sensors = ({ navigation,route }) => {
                 }
 
                 <View  style={{height:520,borderRadius:50}} >
-                    {showGraph?             <View>
+                    {showGraph && sensorData &&             <View  style={{ flexDirection:'row' , alignContent:'center'}}>
                     <VictoryChart containerComponent={<VictoryZoomContainer/>}  width={350} theme={VictoryTheme.material}>
                         <VictoryLine data={sensorData}  y="value" />
                     <VictoryAxis domain={{x:[minX,maxX]}} style={{axisLabel:{
@@ -105,7 +105,7 @@ const Sensors = ({ navigation,route }) => {
                             fontSize: 15, fill:'#06b6d4'
                         }}} dependentAxis crossAxis  label='value'   axisLabelComponent={<VictoryLabel  dy={-30} textAnchor='inherit' />}/>
                     </VictoryChart>
-                </View> :null}
+                </View> }
                     <Button  title='Turn On' onPress={()=>{
                         socket.send(JSON.stringify({type:'control',state:true}))
                     }}/>
